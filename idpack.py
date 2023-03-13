@@ -36,12 +36,21 @@
                 are kind of key to what these classes should have and do. 
                 I do believe the basic structure to be done if its simply a people class without the ability to 
                 hold a cpf and that should do it. Implementing other types of id should also be quite easy.
-"""
 
+    NOTES IN DESIGNING THE CHECKS AND CREATING CLASSES
+        Thing is some user will eventually fuck up and input very shitty id and expect me to deal with it.
+        Shame on him, i won't. Really. I will make him input the id again or cancel the operation. I WILL
+        DO THIS. So, i got to thinking about how to do it anyway. We should prompt the user for the class type
+        to be created too. As a contract manager, most operations *should* be controlled by the user anyway,
+        even if he gotta go ahead and import the stuff directly in python terminal.
+
+"""
+import numpy as np
 TYPELIST = {"CNPJ", "CPF"}
 TYPESIZELIST = {14, 11}
 PARSEFAILCODE = {"notdone", "notnumber"}
 FAILUREFLAG = False
+DELETEFLAG = False
 
 class people:
     def __init__(self, **keyw):
@@ -49,16 +58,56 @@ class people:
         Keys should be:
             cpf
             cnpj
+            seed
+            norandom -> this guy is very very planned. He might not be available in general. I hope so. Too much hassle.
+        and then, the structure 
         """
+        #INITIALIZATION BLOCK
+        seedi : int = 12345
+        if 'seed' in keyw:
+            try:
+                seedi = int(keyw['seed'])
+            except:
+                print("initialization seed should be int compatible. Defaulting to basic seed")
+                seedi : int = 12345
+        else:
+            seedi: int = 12345
+        randos = []
+        rng = np.random.default_rng( seed = seedi ) #this oughta work
         if 'cpf' in keyw:
             self.cpf = keyw[cpf]
-        else:
-            self.cpf = None
+        else: #actually, should generate a random cpf. this is a stub, then. TODO!
+            cpf = rng.integers(10, size = 11)
+            string = ""
+            for char in cpf:
+                string = string + str(char)
+            print(cpf) #debug stuff
+            print(string)  #this too
+            self.cpf = string
+            randos.append('cp') #flags that cpf got created randomly
         if 'cnpj' in keyw:
             self.cnpj = keyw[cnpj]
-        else: 
-            self.cnpj = None
-
+        else: #actually, should generate a random cpf. this is a stub, then. TODO!
+            cnpj = rng.integers(10, size = 14)
+            string = ""
+            for char in cpf:
+                string = string + str(char) #this guy makes every part of the list go into a nice dandy string. 
+            print(cnpj) #debug stuff
+            print(string)  #this too
+            self.cnpj = string
+            randos.append('cn') #flags that cnpj got created randomly
+        #CHECKING BLOCK
+            if 'cp' in randos:
+                pass
+            else:
+                pass
+            if 'cn' in randos:
+                pass
+            else:
+                pass
+            
+    def reroller(self, **kwarg): # this guy shou
+        pass
     def idtesting(someid: str) -> int: #THIS IS A STUB. FINISH ME! TODO!
         failcode = 0
         return failcode
