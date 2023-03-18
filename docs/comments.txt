@@ -1,0 +1,51 @@
+writen initially by locust in 3/17/2023. Locust got some other aliases. Or not. Whatever. 
+"Locust, without any other aliases" is the alias. Alias for what? Secret :>
+
+Anyway, let us begin.
+
+WHAT IS THIS TEXT?
+    This is a commentary on the state of the code. This is basically
+    a companion to my handwritten notes i (should) take about what 
+    I'm doing to keep shit tiddy and organized. Or something like 
+    that. It also serves as a good training for my english, which needs
+    some brushing up, though I try to only write documentation in english as to
+    keep a somewhat consisten standard. Don't count on this, though...
+
+STATEOFTHECODE - 17/03/2023
+
+    datechecker is done and working. still trying to do 
+    something about idpack. Missing most features, though.
+    Might kill myself. We'll see about that.
+
+    Idpack - inprogress
+        Testers - NOTDONE
+        Class init - Completely fucked up & NOTDONE!
+        Checkers - NOTDONE!
+            idtesting: the firewall against fuckups. 
+                Major fuckups from the user are expected. Not something we 
+                can fret about. Major fuckups from the coder, though.
+                That's something quite fretable, if I dare create this word.
+                Random 
+    Main - Not even started
+        csvhandling sould be done here, 
+        since most of the stuff will be custom
+        anyway.
+    Datechecker - Done!
+        Might need to do some bughunting, though.
+    funny - is funny.
+
+    recommended by rkaze:
+        install vampiro extension.
+
+STATEOFTHECODE 18/03/2023
+    Went ahead and finished the idtesting from idpack. failcodes are 
+    also present there. Thing is, you present him a Random generated
+    id and its fucked up, he busts your ass and, along with the failcode
+    he butchers your variable, which is mildly interesting, i'd say. 
+
+
+    and i do.
+
+
+    
+

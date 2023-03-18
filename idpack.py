@@ -43,14 +43,19 @@
         DO THIS. So, i got to thinking about how to do it anyway. We should prompt the user for the class type
         to be created too. As a contract manager, most operations *should* be controlled by the user anyway,
         even if he gotta go ahead and import the stuff directly in python terminal.
-
+    NOTES IN WHY THE FUCK THE ID'S ARE MOSTLY STORED AS STRINGS
+        Basically, because i did just this in my last script, so it just came naturally to do it again.
+        Not that it will help with some kind of compat., specially considering the other "script" was in C.
+        C99, to be more exact, and that runned like fucking dogshit, i kid you not. Anyway, did once and will
+        do it again or something like that. This one should run worse, though. Very very fucking badly, i'd wager.
 """
 import numpy as np
 TYPELIST = {"CNPJ", "CPF"}
-TYPESIZELIST = {14, 11}
-PARSEFAILCODE = {"notdone", "notnumber"}
-FAILUREFLAG = False
-DELETEFLAG = False
+TYPESIZELIST = {14, 11} #kind of legacy
+PARSEFAILCODE = {"notdone", "notnumber"} #legacy
+FAILUREFLAG = False #legacy
+DELETEFLAG = False #legacy
+CODERISMONKY = "MONKYMAKESBADCODE.FUCKYOU.FIXIT!" #this guy is useful to tell you "STOP MAKING BAD FUCKING CODE, BLOODEE MONKEE"
 
 class people:
     def __init__(self, **keyw):
@@ -67,6 +72,7 @@ class people:
         if 'seed' in keyw:
             try:
                 seedi = int(keyw['seed'])
+                self.seed = seedi
             except:
                 print("initialization seed should be int compatible. Defaulting to basic seed")
                 seedi : int = 12345
@@ -77,7 +83,7 @@ class people:
         if 'cpf' in keyw:
             self.cpf = keyw[cpf]
         else: #actually, should generate a random cpf. this is a stub, then. TODO!
-            cpf = rng.integers(10, size = 11)
+            cpf = rng.integers(10, size = 9)
             string = ""
             for char in cpf:
                 string = string + str(char)
@@ -88,7 +94,7 @@ class people:
         if 'cnpj' in keyw:
             self.cnpj = keyw[cnpj]
         else: #actually, should generate a random cpf. this is a stub, then. TODO!
-            cnpj = rng.integers(10, size = 14)
+            cnpj = rng.integers(10, size = 12)
             string = ""
             for char in cpf:
                 string = string + str(char) #this guy makes every part of the list go into a nice dandy string. 
@@ -97,19 +103,231 @@ class people:
             self.cnpj = string
             randos.append('cn') #flags that cnpj got created randomly
         #CHECKING BLOCK
-            if 'cp' in randos:
-                pass
-            else:
-                pass
-            if 'cn' in randos:
-                pass
-            else:
-                pass
+        if 'cp' in randos: # if cp in randos, then it got to be completed. Can't send him to the checker willy nilly, since it got quite a lot of chance to fuckup. 1/99 or something like that.
+            self.idtesting(self.cpf, rando = 1)
             
-    def reroller(self, **kwarg): # this guy shou
-        pass
-    def idtesting(someid: str) -> int: #THIS IS A STUB. FINISH ME! TODO!
+        else:
+            pass
+        if 'cn' in randos:
+            pass
+        else:
+            pass
+            
+    def reroller(self, **kwarg): #this guy should be able to reroll bad cpf or cnpj rolls.
+        rng = np.random.default_rng(seed = self.seed)
+        newcpf = rng.integers(10, size = 9)
+        newcnpj = rng.integers(10, size = 12)
+        if 'cnpj' in kwarg and kwarg['cnpj'] == 1:
+            return newcnpj
+        else: 
+            return newcpf #pretty simple eh. It just shouldn't be called when you don't need it!
+    
+    def idtesting(someid: str, **kwarg) -> int: #THIS IS INCOMPLETE!!! TODO!
+        """
+            funcname: idtester
+            function: tests to see if it's an valid brazilian honest
+                to god id. If not, gives user the middle fingah, ringa.
+            process:
+                1. Checks via kwarg if rando
+                2. Do check or generation
+                    2-1. GENERATION PROCESS
+                        2-1.1. run for first verifier. Append obtained to id
+                        2-1.2. run for second. 
+                        2-1.3. check for fuckup. if fuckup, 
+                    2-2. CHECKING PROCESS
+
+            if kwarg raises flag for rando, then it should add the verification numbers to 
+            the checked number, since random generated id won't have proper verification.
+            ah yeah, as long as keyarg rando is in kwarg, it doesn't even check its value.
+            So if its not rando, do not put rando in the kwarg.   
+
+            TODO NOTE! I CAN PROBABLY CUT THE SIZE OF THIS MONSTER IN HALF IF I DEFINE
+            A FUNCTION TO DO THE HEAVY LIFTING AND SIMPLY USE IT TWICE!!!!!! TODO!!!!!!!!!!!
+
+            its done, though. actually done, iguess. i need to finish the __init__ to actually
+            go ahead and test it, but its done.
+
+            failcodes:
+                0 - passed alright.
+                1 - error during verifier generation in checker
+                2 - invalid id (verifier provided not equal to generated)
+                3 - error during verifier generation in rando
+        """
         failcode = 0
+        size = len(someid) #randos come small size. Gotta have this bit up here.
+        if 'rando' in kwarg: #this guy handles creating verifier digits. Good only for randos. You put a very naughty non-rando here and you're basically asking me to give you the funny error code.
+            fuckup = 0
+            if size == 9: #cpf
+                marker = 11
+                res = 0
+                for char in someid:
+                    marker -= 1
+                    try:
+                        res += marker * int(char) #if this guy does not work, there's a not "intable" inside id. Then we are very fucked. MEANS WE GOT A LETTER IN A RANDO! THIS IS A VERY VERY NAUGHTY FUCKUP!!!
+                    except:
+                        print("major fuckup. check code. this shit got me a NOTNUMBER inside the check. stop this pussy ass mf")
+                        fuckup = 1
+                        break    
+                res = (res * 10)% 11
+                if res == 10:
+                    res = 0
+                try:
+                    someid = someid + char(res) #there, we got the first one. Onto the next.
+                except:
+                    print("got a major one down in a rando.")
+                res = 0 #some cleanup. this and the guy below
+                marker = 12
+                for char in someid: #Go back, Jack, do it again! Wheels turning 'round and 'round...
+                    marker -= 1
+                    try:
+                        res += marker * int(char)
+                    except:
+                        print("major fuckup. check code. this shit got me a NOTNUMBER inside the check. stop this pussy ass mf")
+                        fuckup = 1
+                        break
+                res = (res * 10) % 11
+                if res == 10:
+                    res = 0
+                try:
+                    someid = someid + char(res)
+                except:
+                    print("major fuckup down in rando, second verifier.")
+            elif size == 12: #cnpj TODO!!!! 
+                #its basically the same as cpf, little to no shit is actually changed.
+                marker = 6
+                res = 0
+                for char in someid:
+                    marker -= 1
+                    if marker == 1: #dumb stuff, but whatever.
+                        marker = 9
+                    try:
+                        res += marker * int(char) 
+                    except:
+                        print("major fuckup. check code. this shit got me a NOTNUMBER inside the check. stop this pussy ass mf")
+                        fuckup = 1
+                        break    
+                res = (res * 10)% 11
+                if res == 10:
+                    res = 0
+                try:
+                    someid = someid + char(res)
+                except:
+                    print("got a major one (and by one i mean fuckup) down in a rando.") #NOTE: remember to change these fuckups to some error code. then we write major random fuckup in the code name :>
+                res = 0 
+                marker = 7
+                for char in someid:
+                    marker -= 1
+                    try:
+                        res += marker * int(char)
+                    except:
+                        print("major fuckup. check code. this shit got me a NOTNUMBER inside the check. stop this pussy ass mf")
+                        fuckup = 1
+                        break
+                res = (res * 10) % 11
+                if res == 10:
+                    res = 0
+                someid = someid + char(res)
+            else:
+                print(CODERISMONKY) #skill issue detected. Send him the funny constant :>
+                fuckup = 1
+            #THE FUCKUP BLOCK: notice these checks independ of the result of the checks up there. We check if you fucked up even when you went fine.
+            if fuckup == 0: #meaning no shit got detected during most of the rando stuff. Thennnnnn we run a final check.
+                print("Generated verifier digits successfully. Procceeding to normal check.")
+                failcode = people.idtesting(someid) #now its for real. If it passes the MAN test, then we speak human language in this viscinity!
+            else:
+                print("something wrong in your rando. Here, have some monky :>")
+                someid = CODERISMONKY #Else, you monkey, ooga ooga. Generate some proper id before trying to play aorund this block.
+                failcode = 3
+        else: #this guy handles actual testing. It's the same as generating the stuff, somewhat. 
+            """
+                Basically what we do is generating the correct numbers and check 
+                to see if its the same as the numbers provided. If true, then human
+                language was spoken.
+            """
+            fuckup = 0
+            checkcode = [someid[-2], someid[-1]]
+            someid = someid[0 : size - 2] #this guy here grants me the power of ctrl-c ctrl-v :> We already got the excluded numbers in checkcode, so no harm done.
+            if size == 9: 
+                marker = 11
+                res = 0
+                for char in someid:
+                    marker -= 1
+                    try:
+                        res += marker * int(char) 
+                    except:
+                        print("NOTNUMBER IN CPF")
+                        fuckup = 1
+                        break    
+                res = (res * 10)% 11
+                if res == 10:
+                    res = 0
+                try:
+                    someid = someid + char(res) 
+                except:
+                    print("NOTCHARABLE IN RES")
+                res = 0 #some cleanup. this and the guy below
+                marker = 12
+                for char in someid: #Go back, Jack, do it again! Wheels turning 'round and 'round...
+                    marker -= 1
+                    try:
+                        res += marker * int(char)
+                    except:
+                        print("NOTNUMBER IN CHAR")
+                        fuckup = 1
+                        break
+                res = (res * 10) % 11
+                if res == 10:
+                    res = 0
+                try:
+                    someid = someid + char(res)
+                except:
+                    print("NOTCHARABLE IN RES")
+            elif size == 12:
+                marker = 6
+                res = 0
+                for char in someid:
+                    marker -= 1
+                    if marker == 1:
+                        marker = 9
+                    try:
+                        res += marker * int(char) 
+                    except:
+                        print("NOTNUMBER IN CHAR")
+                        fuckup = 1
+                        break    
+                res = (res * 10)% 11
+                if res == 10:
+                    res = 0
+                try:
+                    someid = someid + char(res)
+                except:
+                    print("NOT CHARABLE IN RES")
+                res = 0 
+                marker = 7
+                for char in someid:
+                    marker -= 1
+                    try:
+                        res += marker * int(char)
+                    except:
+                        print("NOT NUMBER IN CHAR")
+                        fuckup = 1
+                        break
+                res = (res * 10) % 11
+                if res == 10:
+                    res = 0
+                someid = someid + char(res)
+
+            else:
+                print("SIZE INCORRECT!")
+                fuckup = 1
+            #THE FUCKUP BLOCK
+            if fuckup == 0: # No fuckup during processing. Means we can do the final check.
+                checkgot = [someid[-2], someid[-1]]
+                for a, b in checkgot, checkcode:
+                    if a != b:
+                        failcode = 2
+            else: #we got something during process
+                failcode = 1
         return failcode
 class enterprise:
     def __init__(self):
@@ -119,63 +337,6 @@ class contract:
     def __init__(self):
         pass
 
-def idtester(someid): #tests cpf and cnpj and whatever; 
-    """
-    funcname: idtester
-    function: tests to see if it's an valid brazilian honest
-        to god id. If not, gives user the middle fingah, ringa.
-    process:
-        1. Parse string;
-        2. Verify id type;
-            May be done through size or something like that.
-            I do believe to be the most easy way.
-        3. Crunch
-            Get the verify code
-        4. Compare
-        5. Return
-            CREATION OF STANDARD #1:
-                return type of idtester is as follows:
-                    1. failure:
-                        returns 0
-                    2. Success(!):
-                        TYPENUMBER
-                            TYPE - Corresponds to the type of id we're using. May be CP(F) or CN(PJ).
-                            NUMBER - Corresponds to the cnpj or cpf of whatever it is we just checked.
-                            OBS1: Will come out as string. Shouldn't be too hard.
-                            OBS2: No spaces or whatever bullshit of that kind.
-                            OBS3: With letters and numbers, we might be able to implement any kind of code
-                                without too much hassle. Buckle up(?); yee haw?
-
-    """
-    checks = {'types' : TYPELIST, 'sizes': TYPESIZELIST }
-    iscnpj = iscpf = False
-    hasfailed = False
-    #1. PARSE
-    parsed = stringparser(someid)
-    if parsed in PARSEFAILCODE:
-        print("ERRORCODE: STRINGPARSER NOT WORKING. MAKE IT WORK")
-        hasfailed = 1
-        global idtesthasfailed
-        idtesthasfailed = True
-
-    #2. VERIFY TYPE
-    elif hasfailed == False:
-        size = len(parsed)
 
 
-def stringparser(someid): #makes ids with any point or whatever lose that shit. MAKE IT HAVE NO POINTS OR WHATEVER OF THAT FUCKING PIECE OF CRAP! 
-    """
-    funcname: stringparser
-    function: makes so that strings have no shit on them
-        also checks if string is idlike to some extent.
-    process:
-        1. get string #this should already be done by this point, but whatever.
-        2. get rid of space
-        3. get rid of shit
-        4. check for not number. If not number, put code notnumber. Must be number
-    """
-    done = "notdone"
-    notnumber = 0
-    if notnumber == 1:
-        done = "notnumber"
-    return done
+
