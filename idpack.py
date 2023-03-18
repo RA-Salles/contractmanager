@@ -104,14 +104,14 @@ class people:
             randos.append('cn') #flags that cnpj got created randomly
         #CHECKING BLOCK
         if 'cp' in randos: # if cp in randos, then it got to be completed. Can't send him to the checker willy nilly, since it got quite a lot of chance to fuckup. 1/99 or something like that.
-            self.idtesting(self.cpf, rando = 1)
-            
+            fail = self.idtesting(self.cpf, rando = 1)
         else:
-            pass
+            fail = self.idtesting(self.cpf)
         if 'cn' in randos:
-            pass
+            fail = self.idtesting(self.cnpj, rando = 1)
         else:
-            pass
+            fail = self.idtesting(self.cnpj)
+        
             
     def reroller(self, **kwarg): #this guy should be able to reroll bad cpf or cnpj rolls.
         rng = np.random.default_rng(seed = self.seed)
@@ -326,7 +326,7 @@ class people:
                 for a, b in checkgot, checkcode:
                     if a != b:
                         failcode = 2
-            else: #we got something during process
+            else: #we got something during process (fuckup = 1)
                 failcode = 1
         return failcode
 class enterprise:
@@ -337,6 +337,8 @@ class contract:
     def __init__(self):
         pass
 
+if __name__ == '__main__':
+    pass
 
 
 
