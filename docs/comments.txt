@@ -46,6 +46,17 @@ STATEOFTHECODE 18/03/2023
 
     and i do.
 
+STATEOFTHECODE 4/4/23
+    Had to leave for some time. Did some minor stuff to idpack on the side,
+    but today I'm actually giving the pestsmasher treatment to this code. Meaning
+    bugfix, because my Lord knows this shit ass code was buggy as all hell is.
+    Triple funny, even.
+    
+    I WAS FUCKING USING CHAR(something) WHEN I WANTED TO FUCKING WRITE STR.
+    This, my friend, Is how to feel dumb in a single simple step.
+    Now it somewhat works, but it is fucking up the id before passing
+    it back to the object, which ain't good. Might fix that tomorrow.
+
 
     
 
