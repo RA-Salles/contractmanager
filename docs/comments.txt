@@ -57,6 +57,22 @@ STATEOFTHECODE 4/4/23
     Now it somewhat works, but it is fucking up the id before passing
     it back to the object, which ain't good. Might fix that tomorrow.
 
+STATEOFTHECODE 28/04/23
+    Good news: I'm using this badboy of a project for a university subject!
+    Quite fun. Also, i fixed a shitty bug inside datechecker. Now, getdate()
+    should work no problem.
+    Bad news: there's a shit ton of stuff in the todolist inside idpack. Contract
+    will be a very big giant and i still need to write the manager itself.
+    AAAAND imma gonna learn how to do a cli interface so the project ain't
+    actually a bunch of loose packages without use or cohesion. This should
+    work much better. Shame on me, though. Now I get double work. For no 
+    fucking reason whatsoever. 
+    Neutral news: got the chance to use unbeknownst in the middle of a
+    comment. Felt quite neat doing that.
+
+
+
+
 
     
 

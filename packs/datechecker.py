@@ -262,18 +262,18 @@ class date:
             sep = '/' #STANDARD OUTPUT TYPE XX/XX/XXXX
         else:
             sep = kwargs['sep']
-        def usformat():
-            string1 = self.month + sep + self.day + sep + self.year #US Standard
+        def usformat(obj):
+            string1 = obj.month + sep + obj.day + sep + obj.year #US Standard
             return string1
-        def bizarre1format():
-            string1 = self.year + sep + self.month + sep + self.day #Bizarre Testing Standard
+        def bizarre1format(obj):
+            string1 = obj.year + sep + obj.month + sep + obj.day #Bizarre Testing Standard
             return string1
         strdswitch = { "us"       : usformat,
                        "bizarre1" : bizarre1format}
         if 'strd' not in kwargs:
             string = self.day + sep + self.month + sep + self.year #Brazilian Standard
         else:
-            string = strdswitch[kwargs['strd']]
+            string = strdswitch[kwargs['strd']](self)
         return string
     
     def stringdategetter(somestring: str) -> list :
@@ -336,7 +336,7 @@ if __name__ == "__main__":
 #TESTBLOCK2#################################################################################################################
     print("BEGGINING TEST 2.1: NUMBERISOLATOR 1")
     bigstringofisolatornumbers = "aaaaaaaaahahahahahoooohooooo12314241412iiiiiiiii123412412412 1241241     123145666 aaaaaaaa1321414214 "
-        #expected results: ['12314241412', '1234124123412', '1241241', '123145666', '1321414214']
+    #expected results: ['12314241412', '1234124123412', '1241241', '123145666', '1321414214']
     isolatednumbers = date.numberisolator(bigstringofisolatornumbers)
     print(isolatednumbers)
     print("BEGGINING TEST 2.2: NUMBERISOLATOR 2")
@@ -346,7 +346,7 @@ if __name__ == "__main__":
     print(isolatednumbers)
     print("BEGGINING TEST 2.3: NUMBERISOLATOR 3")
     bigstringofisolatornumbers = "19-09!2003"
-        #expected results: ['19', '09', '2003']
+        #expected results: ['19', '09', '2003'] #it fucking works alright
     isolatednumbers = date.numberisolator(bigstringofisolatornumbers)
     print(isolatednumbers)
 #TESTBLOCK3#################################################################################################################
