@@ -1,0 +1,74 @@
+<diagram program="umletino" version="15.1"><zoom_level>11</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>187</y><w>231</w><h>209</h></coordinates><panel_attributes>entity
+--
+-id
+-seed
+--
++generate(self)
++check(self)
+--
+-- id generation
+-- id checking
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1067</x><y>176</y><w>231</w><h>341</h></coordinates><panel_attributes>filehandler
+--
+- contract_handler
+- csv 
+--
++ run()
++ get(key)
++ delete(key)
++ add(id, type)
++ exclude(id, type)
++ contract(parts: list)
+
+
+--
+-- handles csvs
+-- handles contract-files
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>341</x><y>198</y><w>121</w><h>55</h></coordinates><panel_attributes>people
+--
+-_ispeople = 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>341</x><y>308</y><w>121</w><h>55</h></coordinates><panel_attributes>enterprise
+--
+-_isenterprise = 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>209</y><w>143</w><h>99</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;60;70;60;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>275</x><y>275</y><w>88</w><h>77</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;10;50;60;50</additional_attributes></element><element><id>Relation</id><coordinates><x>451</x><y>209</y><w>286</w><h>33</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;240;10</additional_attributes></element><element><id>Relation</id><coordinates><x>451</x><y>220</y><w>286</w><h>143</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;110;60;110;60;10;240;10</additional_attributes></element><element><id>Text</id><coordinates><x>462</x><y>308</y><w>110</w><h>77</h></coordinates><panel_attributes>1.n</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>462</x><y>187</y><w>110</w><h>77</h></coordinates><panel_attributes>1.n</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>429</y><w>231</w><h>209</h></coordinates><panel_attributes>date
+--
+- day
+- month
+- year
+--
++ format()
++ check()
+--
+-- Handles date creation 
+-- Handles date storag </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>231</y><w>517</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;280;300;280;300;10;450;10</additional_attributes></element><element><id>Text</id><coordinates><x>231</x><y>495</y><w>110</w><h>77</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>0</y><w>264</w><h>110</h></coordinates><panel_attributes>idpack
+--
+- entity class
+- people class (soviet union anthem)
+- enterprise class
+- contract
+bg=gray
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>275</x><y>0</y><w>154</w><h>110</h></coordinates><panel_attributes>datechecker
+--
+- date
+bg=gray
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>440</x><y>0</y><w>154</w><h>110</h></coordinates><panel_attributes>manager
+--
+- filehandler
+bg=gray
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>715</x><y>176</y><w>231</w><h>209</h></coordinates><panel_attributes>contract
+--
+-parts
+-date
+-terms
+--
++ check()
++ gen()
++ get()
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>935</x><y>242</y><w>154</w><h>55</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1.n
+m2=
+
+</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element></diagram>

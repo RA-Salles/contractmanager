@@ -1,0 +1,55 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>34</x><y>192</y><w>248</w><h>392</h></coordinates><panel_attributes>atmhandler
+{Some Properties}
+--
+- user: user
+--
++__init__(self, user:user)
+
++addaccount(self)
++delaccount(self,name)
++checkuserhistory(self, name)
++give(money, name)
++take(money, name)
++usertransfer(origin, destiny, money)
+
+#COMMON
++checkhistory(self)
++pay(self, money, destiny)
++getmoney(self, money)
++putmoney(selfmoney)
++program(self, money, user, times, date)
++getcredit(self, money, times, date)
+--
+Responsibilities
+-- Handles adm and money operations 
+*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>386</x><y>8</y><w>168</w><h>152</h></coordinates><panel_attributes>loginhandler
+--
+- User: user
+--
+/+Leave()/
+/+Log()/
+--
+Responsibilities
+-- Verificar informações providas
+*-- Logar o usuário no sistema*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>34</x><y>8</y><w>248</w><h>152</h></coordinates><panel_attributes>User 
+--
+- id: string
+- pass: string
+--
+#update(**kw): None
+/+AbstractOperation()/
+--
+Responsibilities
+-- Stores login info</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>442</x><y>632</y><w>64</w><h>88</h></coordinates><panel_attributes>Commoner</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>954</x><y>632</y><w>48</w><h>88</h></coordinates><panel_attributes>MEISTER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLFrame</id><coordinates><x>530</x><y>512</y><w>392</w><h>216</h></coordinates><panel_attributes>loginhandler</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>570</x><y>552</y><w>96</w><h>32</h></coordinates><panel_attributes>Solicitar conta</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>482</x><y>560</y><w>104</w><h>120</h></coordinates><panel_attributes></panel_attributes><additional_attributes>110;10;110;130;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>658</x><y>560</y><w>320</w><h>120</h></coordinates><panel_attributes>Recebe solicitação</panel_attributes><additional_attributes>380;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>866</x><y>648</y><w>112</w><h>32</h></coordinates><panel_attributes></panel_attributes><additional_attributes>120;20;10;20</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>778</x><y>648</y><w>96</w><h>32</h></coordinates><panel_attributes>cria conta</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>386</x><y>192</y><w>168</w><h>152</h></coordinates><panel_attributes>Menu
+--
+- None
+--
+run(): None
+restart(): None
+exit(): None
+
+--
+Responsibilities
+-- Boot the system and keep it running
+-- Restart
+*-- End operation when needed*</panel_attributes><additional_attributes></additional_attributes></element></diagram>

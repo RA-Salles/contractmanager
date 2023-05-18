@@ -51,6 +51,7 @@
         do it again or something like that. This one should run worse, though. Very very fucking badly, i'd wager.
 """
 import numpy as np
+import datechecker
 TYPELIST = {"CNPJ", "CPF"}
 TYPESIZELIST = {14, 11} #kind of legacy
 PARSEFAILCODE = {"notdone", "notnumber"} #legacy
@@ -392,7 +393,7 @@ class contract:
         if "dt" in kw:
             self.dt = kw['dt']
         else: #TODO!
-            pass 
+            pass
         if "txt" in kw:
             self.txt = kw['txt']
         else: #TODO!
