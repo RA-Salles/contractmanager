@@ -78,6 +78,10 @@ STATEOFTHECODE 16/05/23
         but idpack will certainly be useful for the id part. 
         Might let the users use whatever id, though. 
 
+STATEOFTHECODE 23/05/23
+    Cli will be a very big fucking gross horrible pain in the butt to
+    code, whatsoever. 
+
 
 
 
