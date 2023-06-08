@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>11</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>187</y><w>231</w><h>209</h></coordinates><panel_attributes>entity
+<diagram program="umletino" version="15.1"><zoom_level>12</zoom_level><element><id>UMLClass</id><coordinates><x>40</x><y>204</y><w>252</w><h>228</h></coordinates><panel_attributes>entity
 --
 -id
 -seed
@@ -8,7 +8,7 @@
 --
 -- id generation
 -- id checking
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1067</x><y>176</y><w>231</w><h>341</h></coordinates><panel_attributes>filehandler
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1204</x><y>192</y><w>252</w><h>372</h></coordinates><panel_attributes>filehandler
 --
 - contract_handler
 - csv 
@@ -25,11 +25,11 @@
 -- handles csvs
 -- handles contract-files
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>341</x><y>198</y><w>121</w><h>55</h></coordinates><panel_attributes>people
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>412</x><y>216</y><w>132</w><h>60</h></coordinates><panel_attributes>people
 --
--_ispeople = 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>341</x><y>308</y><w>121</w><h>55</h></coordinates><panel_attributes>enterprise
+-_ispeople = 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>412</x><y>336</y><w>132</w><h>60</h></coordinates><panel_attributes>enterprise
 --
--_isenterprise = 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>209</y><w>143</w><h>99</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;60;70;60;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>275</x><y>275</y><w>88</w><h>77</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;10;50;60;50</additional_attributes></element><element><id>Relation</id><coordinates><x>451</x><y>209</y><w>286</w><h>33</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;240;10</additional_attributes></element><element><id>Relation</id><coordinates><x>451</x><y>220</y><w>286</w><h>143</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;110;60;110;60;10;240;10</additional_attributes></element><element><id>Text</id><coordinates><x>462</x><y>308</y><w>110</w><h>77</h></coordinates><panel_attributes>1.n</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>462</x><y>187</y><w>110</w><h>77</h></coordinates><panel_attributes>1.n</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>429</y><w>231</w><h>209</h></coordinates><panel_attributes>date
+-_isenterprise = 1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>228</y><w>156</w><h>108</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;60;70;60;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>300</y><w>96</w><h>84</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;10;50;60;50</additional_attributes></element><element><id>Relation</id><coordinates><x>532</x><y>228</y><w>312</w><h>36</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;240;10</additional_attributes></element><element><id>Relation</id><coordinates><x>532</x><y>240</y><w>312</w><h>156</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;110;60;110;60;10;240;10</additional_attributes></element><element><id>Text</id><coordinates><x>544</x><y>336</y><w>120</w><h>84</h></coordinates><panel_attributes>1.n</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>544</x><y>204</y><w>120</w><h>84</h></coordinates><panel_attributes>1.n</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>468</y><w>252</w><h>228</h></coordinates><panel_attributes>date
 --
 - day
 - month
@@ -39,23 +39,23 @@
 + check()
 --
 -- Handles date creation 
--- Handles date storag </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>231</y><w>517</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;280;300;280;300;10;450;10</additional_attributes></element><element><id>Text</id><coordinates><x>231</x><y>495</y><w>110</w><h>77</h></coordinates><panel_attributes>1
-style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>0</y><w>264</w><h>110</h></coordinates><panel_attributes>idpack
+-- Handles date storag </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>252</y><w>564</w><h>360</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;280;300;280;300;10;450;10</additional_attributes></element><element><id>Text</id><coordinates><x>292</x><y>540</y><w>120</w><h>84</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>40</x><y>0</y><w>288</w><h>120</h></coordinates><panel_attributes>idpack
 --
 - entity class
 - people class (soviet union anthem)
 - enterprise class
 - contract
 bg=gray
-fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>275</x><y>0</y><w>154</w><h>110</h></coordinates><panel_attributes>datechecker
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>340</x><y>0</y><w>168</w><h>120</h></coordinates><panel_attributes>datechecker
 --
 - date
 bg=gray
-fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>440</x><y>0</y><w>154</w><h>110</h></coordinates><panel_attributes>manager
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>520</x><y>0</y><w>168</w><h>120</h></coordinates><panel_attributes>manager
 --
 - filehandler
 bg=gray
-fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>715</x><y>176</y><w>231</w><h>209</h></coordinates><panel_attributes>contract
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>192</y><w>252</w><h>228</h></coordinates><panel_attributes>contract
 --
 -parts
 -date
@@ -67,7 +67,7 @@ fg=red</panel_attributes><additional_attributes></additional_attributes></elemen
 --
 Responsibilities
 -- Resp1
-*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>935</x><y>242</y><w>154</w><h>55</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1060</x><y>264</y><w>168</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1.n
 m2=
 

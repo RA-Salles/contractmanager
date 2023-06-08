@@ -59,8 +59,7 @@ FAILUREFLAG = False #legacy
 DELETEFLAG = False #legacy
 CODERISMONKY = "MONKYMAKESBADCODE.FUCKYOU.FIXIT!" #this guy is real useful. Calls the programmer a bloody monkey. Very funny.
 
-class entity:
-
+class entity():
     def __init__(self, **keyw):
         """
         Keys should be:
@@ -350,7 +349,6 @@ class enterprise(people):
         The class literally exists solely to differentiate between these two. also some oop testing,
         yeah?
     """
-
 class contract:
     def __init__(self, **kw):
         """
@@ -399,6 +397,9 @@ class contract:
         else: #TODO!
             pass
         pass
+#####################up is contract manager #####################333
+########DOWNWARD is some user functions for atmhandler#############
+
 
 if __name__ == '__main__':
     print("IDPACK STARTED AS MAIN. INITIALIZING TESTING ROUTINE!")

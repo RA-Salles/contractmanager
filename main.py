@@ -38,4 +38,82 @@
             A planned function, a contract is as good as nothing if it can't be checked, so go ahead 
             and let the user look for contracts using cpf as a searcher. 
 """
-print("quite empty eh? I like to write my tools first, though!")
+import os 
+import pandas as pd
+#K_DATABASEDIR = os.path.join(os.getcwd, 'data') #this causes a fucking error!
+K_USERS = pd.DataFrame({
+    'users' : ['root','testuser'],
+    'home' : ['user00','xyz']
+})
+K_ROOTAUTH = pd.DataFrame(
+    {
+    'pass'  : ['masterpass'],
+    'isroot': ['yes']
+    }
+    )
+K_COMMONAUTH = pd.DataFrame(
+    {
+    'pass'  : ['pass'],
+    'isroot': ['no']
+    }
+    )
+K_ROOTACC = pd.DataFrame(
+    {
+        'cash' : [],
+    }
+)
+K_ROOTHIST = pd.DataFrame(
+    {
+        'date'    : [], #should contain datetime print of when command was done
+        'command' : [] #command should contain comand, targets and miscelaneous info.
+    }
+)
+K_ROOTRQ = pd.DataFrame(
+    {
+        'user' : ['xyz'],
+        'date' : ['19/09/2003'],
+        'type' : ['crd 1000 3', ],
+        'res'  : ['null'] #null or no or yes. Null ones get buttfucked into oblivion. yes and null are kept when requests clear command is given.
+    }
+)
+
+def createfolder(name: str): #folders should be separated by '/' like data/user00/folder1  
+    point = os.getcwd()
+    path = name.split('/')
+    for folder in path:
+        point = os.path.join(point, folder)  
+        print(point)
+    if not os.path.exists(point):
+        print("creating folder!")
+        print(point)
+        os.makedirs(point)
+
+def do_maker():
+    K_USERS
+    """
+        do_maker is the function of your dreams! it prepares the database for functioning using pandas.
+    """
+    pass
+
+def makeuser():
+    """
+        what it should do:
+            create random string of 20 letters. This string will be the name of the folder.
+            Get the name of the person.
+            Write the name in the same space as the folder in the users.csv. 
+
+    """
+    pass
+
+def getdatabasepath():
+    path = os.getcwd()
+    path = os.path.join(path, 'data')
+    return path
+
+if __name__ == "__main__":
+    path = getdatabasepath()
+    path = os.path.join(path, 'base')
+    path = os.path.join(path, 'auth.csv')
+    K_COMMONAUTH.to_csv(path, index=False)
+
+    
