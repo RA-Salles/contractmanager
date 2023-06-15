@@ -83,6 +83,11 @@ STATEOFTHECODE 23/05/23
     code, whatsoever. 
 
 
+boot
+root
+srv 
+
+
 
 
 

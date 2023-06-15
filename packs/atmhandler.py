@@ -25,6 +25,7 @@ def createfolder(name: str): #folders should be separated by '/' like data/user0
         print("creating folder!")
         print(point)
         os.makedirs(point)
+
 #PANDAS THINGS
 def changeproperty(path, property, newval): #won't work for multispace properties, such as hist stuff. Use accordingly
     df = pd.read_csv(path)
@@ -52,12 +53,13 @@ def histadd(user, command: str): #format command accordingly, else hist will get
     home    = os.path.join(home, homename)
     histpath= os.path.join(home, 'hist.csv')
     histdf  = pd.read_csv(histpath)
-    comms   = pd.DataFrame([[now, command]], ['date', 'command'])
-    newhist = pd.concat(histdf, comms)
-    newhist.to_csv(histpath, index = False)
+    comms   = [now, command]
+    n = len(histdf.index)
+    histdf.loc[n] = comms
+    histdf.to_csv(histpath, index = False)
 
 #MEISTERONLY
-def addaccount(accpath: str, pswd: str): #this guy take no input. There should be a handler for a name and a pass, though.
+def addaccount(accpath: str, pswd: str): #IT WORKS!
     #set paths
     name         = accpath
     databasepath = getdatabasepath()
@@ -74,10 +76,12 @@ def addaccount(accpath: str, pswd: str): #this guy take no input. There should b
         except:
             fail = 1
         if fail == 0: #if creating directory works, 
-            home     = 'sometesthome' #this guy should be random TODO!
-            newuser  = pd.DataFrame([[name, home]], index = ['users', 'home'])
-            fulluser = pd.concat(userspd, newuser)
-            fulluser.to_csv(userspath, index = False)
+            home     = name #this guy should be random TODO!
+            newuser  = [name, name]
+            n = len(userspd.index)
+            userspd.loc[n] = newuser
+            print(userspd)
+            userspd.to_csv(userspath, index = False)
         else:
              print('fail in shutil on addaccount function')   
     else:
@@ -109,7 +113,7 @@ def give(money, name): #this function NEEDS to check for the logged user name. m
         i += 1
         if user == name:
             break
-    target = userdf['home'][i]
+    target = usersdf['home'][i]
     targethome = os.path.join(dpath, target)
     res = getproperty(targethome, 'cash') + money
     changeproperty(targethome, 'cash', res)
@@ -123,60 +127,33 @@ def take(money, name):
         i += 1
         if user == name:
             break
-    target = userdf['home'][i]
+    target = usersdf['home'][i]
     targethome = os.path.join(dpath, target)
     res = getproperty(targethome, 'cash') - money
     changeproperty(targethome, 'cash', res)
 
 def usertransfer(origin, destiny, money):
+    
     give(money, destiny)
     take(money, origin)
 
-#COMMON
 
-def checkhistory(): #
-    if logged == True:
-        name = getloggedname()
-        checkuserhistory(name)
-    else:
-        print("log first :>")
-
-def pay(money, destiny):
-    if logged == True:
-        name = getloggedname()
-        usertransfer(name, )
-    else:
-        print("log first :>")
-
-def getmoney(money):
-    if logged == True:
-        name = getloggedname()
-        checkuserhistory(name)
-    else:
-        print("log first :>")
-
-def putmoney(money):
-    if logged == True:
-        name = getloggedname()
-        checkuserhistory(name)
-    else:
-        print("log first :>")
-
-def program(money, user, times, date):
-    if logged == True:
-        name = getloggedname()
-        checkuserhistory(name)
-    else:
-        print("log first :>")
-
-def getcredit(money, times, date):
-    if logged == True:
-        name = getloggedname()
-        checkuserhistory(name)
-    else:
-        print("log first :>")
+#COMMON -> moved to commands
 
 
 
-
-
+if __name__ == '__main__': 
+    '''
+    a = pd.DataFrame(
+        {
+            'home'  : ['user1', 'user2', 'user3'],
+            'funny' : ['a', 'b', 'c']
+        }
+                    )
+    print(a)
+    print(len(a.index))
+    print(a.loc[0])
+    a.loc[3] = ['user4', 'd']
+    print(a)
+    '''
+    addaccount('evenmorefunny', 'evenmorefunny')
