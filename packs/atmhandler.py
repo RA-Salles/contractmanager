@@ -8,8 +8,8 @@ import pandas as pd
 import os
 import shutil
 from datetime import datetime
-
 #FOLDERTHINGS
+
 def getdatabasepath():
     path = os.getcwd()
     path = os.path.join(path, 'data')
@@ -26,84 +26,155 @@ def createfolder(name: str): #folders should be separated by '/' like data/user0
         print(point)
         os.makedirs(point)
 #PANDAS THINGS
-def changeproperties(path, property, newval): #won't work for multispace properties, such as hist stuff. Use accordingly
+def changeproperty(path, property, newval): #won't work for multispace properties, such as hist stuff. Use accordingly
     df = pd.read_csv(path)
     df[property][0] = newval
     df.to_csv(path)
 
+def getproperty(path, property): #also won't work for multiple space properties. Ultrafun
+    df = pd.read_csv(path)
+    val = df[property][0]
+    return val
+
 def histadd(user, command: str): #format command accordingly, else hist will get buttfucked. **Remember to implement a check to see if the user using the command has access to that specific home.**
-    now = datetime.today()
-    now =  now.isoformat()
-    users = getdatabasepath()
-    users = os.path.join(users, 'users.csv')
+    now     = datetime.today()
+    now     =  now.isoformat()
+    users   = getdatabasepath()
+    users   = os.path.join(users, 'users.csv')
     dfusers = pd.read_csv(users)
-    i: int = -1
+    i: int  = -1
     for name in dfusers['users']:
         i += 1
         if name == user:
             break
-    homename = dfusers['users'][i]
-    home = getdatabasepath()
-    home = os.path.join(home, homename)
-    histpath = os.path.join(home, 'hist.csv')
-    histdf = pd.read_csv(histpath)
-    comms = pd.DataFrame([[now, command]], ['date', 'command'])
+    homename= dfusers['users'][i]
+    home    = getdatabasepath()
+    home    = os.path.join(home, homename)
+    histpath= os.path.join(home, 'hist.csv')
+    histdf  = pd.read_csv(histpath)
+    comms   = pd.DataFrame([[now, command]], ['date', 'command'])
     newhist = pd.concat(histdf, comms)
     newhist.to_csv(histpath, index = False)
 
 #MEISTERONLY
 def addaccount(accpath: str, pswd: str): #this guy take no input. There should be a handler for a name and a pass, though.
-    #CREATE BASE DIRECTORY
-    name = accpath
+    #set paths
+    name         = accpath
     databasepath = getdatabasepath()
-    userspd = os.path.join(databasepath, 'users.csv')
-    userspd = pd.read_csv(userspd)
-    baseuser = os.path.join(databasepath, 'base')
-    accpath = os.path.join(databasepath, accpath)
-    
+    userspd      = os.path.join(databasepath, 'users.csv')
+    userspath    = userspd
+    userspd      = pd.read_csv(userspd)
+    baseuser     = os.path.join(databasepath, 'base')
+    accpath      = os.path.join(databasepath, accpath)
+    #create directory
     if not os.path.exists(accpath):
         fail = 0
         try:
             shutil.copytree(baseuser, accpath)
         except:
             fail = 1
-        if fail == 0:
-            home = 'sometesthome' #this guy should be random TODO!
-            newuser = pd.DataFrame([[name, home]], index = ['users', 'home'])
+        if fail == 0: #if creating directory works, 
+            home     = 'sometesthome' #this guy should be random TODO!
+            newuser  = pd.DataFrame([[name, home]], index = ['users', 'home'])
+            fulluser = pd.concat(userspd, newuser)
+            fulluser.to_csv(userspath, index = False)
         else:
              print('fail in shutil on addaccount function')   
     else:
         print('user exists. halt')
 
-def delaccount(name):
+def delaccount(name): #research how to dell an account TODO!
     pass
+
 def checkuserhistory(name):
-    pass
-def give(money, name):
-    pass
+    databpath = getdatabasepath()
+    userspath = os.path.join(databpath, 'users.csv')
+    userspd = pd.read_csv(userspath)
+    i = -1
+    for user in userspd['users']:
+        i += 1
+        if user == name:
+            break #meaning the position is stored inside i
+    homename = userspd['home'][i]
+    homepath = os.path.join(databpath, homename)
+    hist = pd.read_csv(os.path.join(homepath, 'hist.csv'))
+    print(hist)
+
+def give(money, name): #this function NEEDS to check for the logged user name. meaning it MUST check for a global which MUST have the actual users homename or path, whatever. 
+    dpath = getdatabasepath()
+    userspath = os.path.join(dpath, 'users.csv')
+    usersdf = pd.read_csv(userspath)
+    i = -1
+    for user in usersdf['name']:
+        i += 1
+        if user == name:
+            break
+    target = userdf['home'][i]
+    targethome = os.path.join(dpath, target)
+    res = getproperty(targethome, 'cash') + money
+    changeproperty(targethome, 'cash', res)
+
 def take(money, name):
-    pass
+    dpath = getdatabasepath()
+    userspath = os.path.join(dpath, 'users.csv')
+    usersdf = pd.read_csv(userspath)
+    i = -1
+    for user in usersdf['name']:
+        i += 1
+        if user == name:
+            break
+    target = userdf['home'][i]
+    targethome = os.path.join(dpath, target)
+    res = getproperty(targethome, 'cash') - money
+    changeproperty(targethome, 'cash', res)
+
 def usertransfer(origin, destiny, money):
-    pass
+    give(money, destiny)
+    take(money, origin)
 
 #COMMON
+
 def checkhistory(): #
-    pass
+    if logged == True:
+        name = getloggedname()
+        checkuserhistory(name)
+    else:
+        print("log first :>")
 
 def pay(money, destiny):
-    pass
+    if logged == True:
+        name = getloggedname()
+        usertransfer(name, )
+    else:
+        print("log first :>")
 
 def getmoney(money):
-    pass
+    if logged == True:
+        name = getloggedname()
+        checkuserhistory(name)
+    else:
+        print("log first :>")
 
 def putmoney(money):
-    pass
+    if logged == True:
+        name = getloggedname()
+        checkuserhistory(name)
+    else:
+        print("log first :>")
 
 def program(money, user, times, date):
-    pass
+    if logged == True:
+        name = getloggedname()
+        checkuserhistory(name)
+    else:
+        print("log first :>")
 
 def getcredit(money, times, date):
-    pass
+    if logged == True:
+        name = getloggedname()
+        checkuserhistory(name)
+    else:
+        print("log first :>")
 
 
 

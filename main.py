@@ -40,6 +40,8 @@
 """
 import os 
 import pandas as pd
+from packs.atmhandler import getdatabasepath
+from packs.atmhandler import createfolder
 #K_DATABASEDIR = os.path.join(os.getcwd, 'data') #this causes a fucking error!
 K_USERS = pd.DataFrame({
     'users' : ['root','testuser'],
@@ -77,16 +79,13 @@ K_ROOTRQ = pd.DataFrame(
     }
 )
 
-def createfolder(name: str): #folders should be separated by '/' like data/user00/folder1  
-    point = os.getcwd()
-    path = name.split('/')
-    for folder in path:
-        point = os.path.join(point, folder)  
-        print(point)
-    if not os.path.exists(point):
-        print("creating folder!")
-        print(point)
-        os.makedirs(point)
+K_PAYUP = pd.DataFrame(
+    {
+        'time'    : [],
+        'destiny' : [],
+        'cash'    : []
+    }
+)
 
 def do_maker():
     K_USERS
@@ -105,15 +104,12 @@ def makeuser():
     """
     pass
 
-def getdatabasepath():
-    path = os.getcwd()
-    path = os.path.join(path, 'data')
-    return path
+
 
 if __name__ == "__main__":
     path = getdatabasepath()
-    path = os.path.join(path, 'base')
-    path = os.path.join(path, 'auth.csv')
-    K_COMMONAUTH.to_csv(path, index=False)
+    path = os.path.join(path, 'user00')
+    path = os.path.join(path, 'payup.csv')
+    K_PAYUP.to_csv(path, index=False)
 
     
